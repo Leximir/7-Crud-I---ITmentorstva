@@ -12,21 +12,13 @@
                 <h2 class="mb-4">Welcome to the shop page !</h2>
 
                 <ol>
-                @foreach($products as $product)
+                @foreach($allProducts as $product)
 
-                    @if($product === 'Iphone 15' || $product === 'Nokia 3310')
-                        <li>
-                            <a href="">{{ $product }}</a>
-                            <p> - Super snizenje</p>
-                        </li>
+                    <li>
+                        <a href="">{{ $product->name }}</a>
+                    </li>
 
-                    @else
 
-                            <li>
-                                <a href="">{{ $product }}</a>
-                            </li>
-
-                    @endif
                 @endforeach
                 </ol>
 

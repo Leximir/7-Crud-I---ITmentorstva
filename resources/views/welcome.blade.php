@@ -21,6 +21,9 @@
                     The current time is <strong>{{ $currentTime }}</strong>
                 </p>
 
+                @foreach($latestProducts as $product)
+                    <p>{{ $product->name }}</p>
+                @endforeach
             </div>
         </div>
 
