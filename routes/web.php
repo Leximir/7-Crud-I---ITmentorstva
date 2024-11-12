@@ -2,26 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function() {
-    return view('welcome' , [
-        'pageTitle' => 'Home'
-    ]);
-});
-
-Route::get('/shop', function() {
-    return view('shop' , [
-        'pageTitle' => 'Shop'
-    ]);
-});
-
-Route::get('/contact', function() {
-    return view('contact' , [
-        'pageTitle' => 'Contact'
-    ]);
-});
-
-Route::get('/about', function() {
-    return view('about' , [
-        'pageTitle' => 'About'
-    ]);
-});
+Route::get("/", [\App\Http\Controllers\HomepageController::class , 'index']);
+Route::get("about" , [\App\Http\Controllers\AboutController::class , 'index']);
+Route::get("/contact" , [\App\Http\Controllers\ContactController::class , 'index']);
+Route::get("/shop" , [\App\Http\Controllers\ShopController::class , 'index']);
