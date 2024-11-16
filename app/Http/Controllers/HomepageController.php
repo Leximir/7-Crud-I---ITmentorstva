@@ -16,6 +16,7 @@ class HomepageController extends Controller
             'currentTime' => date("H:i:s"),
             'currentHour' => $hour,
             'latestProducts' => Products::all()->reverse()->take(6)
+            // Moze i Products::orderByDesc('id')->take(6)->get()
         ]);
     }
 }

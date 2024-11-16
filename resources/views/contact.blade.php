@@ -29,7 +29,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
 
-            <button type="button" class="btn btn-primary mb-5">Send</button>
+            <button type="submit" class="btn btn-primary mb-5">Send</button>
         </div>
 
         <!-- Centrirana mapa -->
