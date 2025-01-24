@@ -8,19 +8,34 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     public function index() {
+        return view('admin-products' , [
+            'pageTitle' => 'All Products' ,
+            'allProducts' => Products::all()
+        ]);
+    }
+    public function indexClient() {
         return view('shop' , [
             'pageTitle' => 'Shop' ,
             'allProducts' => Products::all()
         ]);
     }
-    public function indexAdmin(){
-        return view('admin-products' , [
-            'pageTitle' => "New Product" ,
-            'allProducts' => Products::all()
+    public function delete($product){
+        $singleProduct = Products::where(['id' => $product])->first(); // SELECT * FROM products WHERE id = $product LIMIT 1
+
+        if($singleProduct === null){
+            die('Ovaj proizvod ne postoji');
+        }
+
+        $singleProduct->delete();
+
+        return redirect()->back();
+    }
+    public function newProduct(){
+        return view('newproduct' , [
+            'pageTitle' => 'New Product'
         ]);
     }
-
-    public function newProduct(Request $request) {
+    public function addProduct(Request $request){
         $request->validate([
             'name' => "required|string",
             'description' => "required|string",
@@ -37,6 +52,7 @@ class ProductsController extends Controller
             'image' => $request->get('image'),
         ]);
 
-        return redirect('/shop');
+        return redirect('/admin/all-products');
     }
+
 }

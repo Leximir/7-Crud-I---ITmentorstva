@@ -14,7 +14,7 @@ class ContactController extends Controller{
     public function getAllContacts(){
 
         return view('all-contacts' , [
-            'pageTitle' => 'ADMIN',
+            'pageTitle' => 'All Contacts',
             'allContacts' => Contacts::all() // SELECT * FROM contacts
         ]);
     }
@@ -32,5 +32,16 @@ class ContactController extends Controller{
         ]);
 
         return redirect('/shop');
+    }
+    public function delete($contact){
+        $singleContact = Contacts::where(['id' => $contact])->first(); // SELECT * FROM contacts WHERE id = $contact LIMIT 1
+
+        if($singleContact === null){
+            die('Ovaj proizvod ne postoji');
+        }
+
+        $singleContact->delete();
+
+        return redirect()->back();
     }
 }

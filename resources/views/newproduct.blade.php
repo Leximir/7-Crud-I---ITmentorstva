@@ -32,12 +32,12 @@
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Amount</label>
-                <input name="amount" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Amount">
+                <input name="amount" type="number" class="form-control" id="exampleFormControlInput1" placeholder="Amount">
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Price</label>
-                <input name="price" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Price">
+                <input name="price" type="number" class="form-control" id="exampleFormControlInput1" placeholder="Price">
             </div>
 
             <div class="mb-3">
@@ -45,7 +45,7 @@
                 <input name="image" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Image">
             </div>
 
-            <button type="submit" class="btn btn-primary mb-5">Send</button>
+            <button type="submit" class="btn btn-primary mb-5">Add</button>
         </div>
     </form>
 
