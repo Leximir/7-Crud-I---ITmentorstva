@@ -6,7 +6,14 @@
 
 @section("pageContent")
 
-    <form action="" class="container">
+    <form action="/send-contact" method="POST" class="container">
+
+        @if($errors->any())
+            <p>Error: {{ $errors->first() }}</p>
+        @endif
+
+        {{ csrf_field() }}
+
         <div class="my-5">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
@@ -16,17 +23,17 @@
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlInput2" class="form-label">Subject</label>
-                <input type="text" class="form-control" id="exampleFormControlInput2">
+                <input name="subject" type="text" class="form-control" id="exampleFormControlInput2">
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary mb-5">Send</button>

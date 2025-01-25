@@ -22,13 +22,13 @@ class ContactController extends Controller{
         $request->validate([
             "email" => "required|string" ,
             "subject" => "required|string",
-            "description" => "required|string|min:5|max:255"
+            "message" => "required|string|min:5|max:255"
         ]);
 
         Contacts::create([
             "email" => $request->get("email"),
             "subject" => $request->get("subject"),
-            "message" => $request->get("description")
+            "message" => $request->get("message")
         ]);
 
         return redirect('/shop');
@@ -37,7 +37,7 @@ class ContactController extends Controller{
         $singleContact = Contacts::where(['id' => $contact])->first(); // SELECT * FROM contacts WHERE id = $contact LIMIT 1
 
         if($singleContact === null){
-            die('Ovaj proizvod ne postoji');
+            die('Ovaj kontakt ne postoji');
         }
 
         $singleContact->delete();

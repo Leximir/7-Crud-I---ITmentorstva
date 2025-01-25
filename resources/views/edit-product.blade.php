@@ -9,35 +9,36 @@
 
         <h2 class="mb-4">{{ $pageTitle }}</h2>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
+        <form action="{{ route('SnimanjeEditovanogProizvoda' , ['id' => $product->id]) }}" method="POST">
 
-                @foreach($allProducts as $product)
+            {{ csrf_field() }}
+
+            <table class="table">
+                <thead>
                     <tr>
-                        <th scope="row">{{ $product['id'] }}</th>
-                        <td>{{ $product['name'] }}</td>
-                        <td>{{ $product['description'] }}</td>
-                        <td>{{ $product['amount'] }}</td>
-                        <td>{{ $product['price'] }}</td>
-                        <td>{{ $product['image'] }}</td>
-                        <td>
-                            <a class="btn btn-danger" href="{{ route('BrisanjeProizvoda' , ['product' => $product['id']]) }}">Obrisi</a>
-                            <a class="btn btn-primary" href="">Edituj</a>
-                        </td>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Image</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+
+                        <tr>
+                            <th scope="row">{{ $product['id'] }}</th>
+                            <td><input name="name" value="{{ $product['name'] }}" type="text"></td>
+                            <td><input name="description" value="{{ $product['description'] }}" type="text"></td>
+                            <td><input name="amount" value="{{ $product['amount'] }}" type="text"></td>
+                            <td><input name="price" value="{{ $product['price'] }}" type="text"></td>
+                            <td><input name="image" value="{{ $product['image'] }}" type="text"></td>
+                        </tr>
+
+                </tbody>
+            </table>
+
+            <button class="btn btn-primary">Sacuvaj izmjene</button>
+        </form>
     </div>
 @endsection

@@ -19,6 +19,19 @@ class ProductsController extends Controller
             'allProducts' => Products::all()
         ]);
     }
+    public function indexEdit(Request $request , $id){
+
+        // SELECT * FROM products WHERE
+        $product = Products::where(['id' => $id])->first();
+
+        if($product === null){
+            die('Ovaj proizvod ne postoji!');
+        }
+
+        return view('edit-product' , compact('product') , [
+            'pageTitle' => 'Edit Product' ,
+        ]);
+    }
     public function delete($product){
         $singleProduct = Products::where(['id' => $product])->first(); // SELECT * FROM products WHERE id = $product LIMIT 1
 
@@ -37,9 +50,9 @@ class ProductsController extends Controller
     }
     public function addProduct(Request $request){
         $request->validate([
-            'name' => "required|string",
+            'name' => "required|string|unique:products",
             'description' => "required|string",
-            'amount' => "required|int",
+            'amount' => "required|int|min:0",
             'price' => "required|numeric",
             'image' => "string"
         ]);
@@ -52,7 +65,30 @@ class ProductsController extends Controller
             'image' => $request->get('image'),
         ]);
 
-        return redirect('/admin/all-products');
+        return redirect()->route('SviProizvodi');
+    }
+    public function editProduct(Request $request , $id){
+        $request->validate([
+            'name' => "required|string|unique:products",
+            'description' => "required|string",
+            'amount' => "required|int|min:0",
+            'price' => "required|numeric",
+            'image' => "string"
+        ]);
+
+        $product = Products::where(['id' => $id])->first();
+        if($product === null){
+            die('Ovaj proizvod ne postoji');
+        }
+
+        $product->name = $request->get('name');
+        $product->description = $request->get('description');
+        $product->amount = $request->get('amount');
+        $product->price = $request->get('price');
+        $product->image = $request->get('image');
+        $product->save();
+
+        return redirect()->route('SviProizvodi');
     }
 
 }

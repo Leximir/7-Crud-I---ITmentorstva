@@ -8,12 +8,21 @@ Route::get("about" , [\App\Http\Controllers\AboutController::class , 'index']);
 
 Route::get("/contact" , [\App\Http\Controllers\ContactController::class , 'index']);
 
-Route::get("/admin/all-contacts" , [\App\Http\Controllers\ContactController::class , 'getAllContacts']);
-Route::get("/admin/delete-contact/{contact}" , [\App\Http\Controllers\ContactController::class , 'delete']);
-Route::get('/admin/all-products' , [\App\Http\Controllers\ProductsController::class , 'index'] );
-Route::get('/admin/delete-product/{product}' , [\App\Http\Controllers\ProductsController::class , 'delete']);
+Route::get("/admin/all-contacts" , [\App\Http\Controllers\ContactController::class , 'getAllContacts'])
+    ->name('SviKontakti');
+Route::get("/admin/delete-contact/{contact}" , [\App\Http\Controllers\ContactController::class , 'delete'])
+    ->name('BrisanjeKontakta');
+Route::get('/admin/all-products' , [\App\Http\Controllers\ProductsController::class , 'index'] )
+    ->name('SviProizvodi');
+Route::get('/admin/delete-product/{product}' , [\App\Http\Controllers\ProductsController::class , 'delete'])
+    ->name('BrisanjeProizvoda');
 Route::get("/admin/add-product" , [\App\Http\Controllers\ProductsController::class , 'newProduct']);
-Route::post("/admin/add-product" , [\App\Http\Controllers\ProductsController::class , 'addProduct']);
+Route::post("/admin/product/save" , [\App\Http\Controllers\ProductsController::class , 'addProduct'])
+    ->name('SnimanjeProizvoda');
+Route::get('admin/product/edit/{id}' , [\App\Http\Controllers\ProductsController::class , 'indexEdit'])
+    ->name('EditovanjeProizvoda');
+Route::post('admin/product/edit/save/{id}' , [\App\Http\Controllers\ProductsController::class , 'editProduct'])
+    ->name('SnimanjeEditovanogProizvoda');
 
 Route::post("/send-contact" , [\App\Http\Controllers\ContactController::class , 'sendContact']);
 

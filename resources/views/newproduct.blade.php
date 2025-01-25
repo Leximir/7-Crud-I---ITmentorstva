@@ -6,10 +6,12 @@
 
 @section("pageContent")
 
-    <form action="/admin/add-product" method="POST" class="container">
+    <form action="{{ route('SnimanjeProizvoda') }}" method="POST" class="container">
 
         @if($errors->any())
-            <p>Error: {{ $errors->first() }}</p>
+            @foreach($errors->all() as $error)
+                <p>Error: {{ $error }}</p>
+            @endforeach
         @endif
 
         {{ csrf_field() }}
@@ -22,27 +24,27 @@
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Name</label>
-                <input name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+                <input name="name" type="text" class="form-control" value="{{ old('name') }}" id="exampleFormControlInput1" placeholder="Name">
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlInput2" class="form-label">Description</label>
-                <textarea name="description" class="form-control" id="exampleFormControlInput2"></textarea>
+                <input name="description" type="text" class="form-control" value="{{ old('description') }}" id="exampleFormControlInput2"></input>
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Amount</label>
-                <input name="amount" type="number" class="form-control" id="exampleFormControlInput1" placeholder="Amount">
+                <input name="amount" type="number" class="form-control" value="{{ old('amount') }}" id="exampleFormControlInput1" placeholder="Amount">
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Price</label>
-                <input name="price" type="number" class="form-control" id="exampleFormControlInput1" placeholder="Price">
+                <input name="price" type="number" class="form-control" value="{{ old('price') }}" id="exampleFormControlInput1" placeholder="Price">
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Image</label>
-                <input name="image" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Image">
+                <input name="image" type="text" class="form-control" value="{{ old('image') }}" id="exampleFormControlInput1" placeholder="Image">
             </div>
 
             <button type="submit" class="btn btn-primary mb-5">Add</button>
