@@ -9,7 +9,7 @@
 
         <h2 class="mb-4">{{ $pageTitle }}</h2>
 
-        <form action="{{ route('SnimanjeEditovanogProizvoda' , ['id' => $product->id]) }}" method="POST">
+        <form action="{{ route('SnimanjeEditovanogProizvoda' , ['product' => $product->id]) }}" method="POST">
 
             {{ csrf_field() }}
 

@@ -19,14 +19,7 @@ class ProductsController extends Controller
             'allProducts' => Products::all()
         ]);
     }
-    public function indexEdit(Request $request , $id){
-
-        // SELECT * FROM products WHERE
-        $product = Products::where(['id' => $id])->first();
-
-        if($product === null){
-            die('Ovaj proizvod ne postoji!');
-        }
+    public function indexEdit(Request $request , Products $product){
 
         return view('edit-product' , compact('product') , [
             'pageTitle' => 'Edit Product' ,
@@ -67,7 +60,7 @@ class ProductsController extends Controller
 
         return redirect()->route('SviProizvodi');
     }
-    public function editProduct(Request $request , $id){
+    public function editProduct(Request $request , Products $product){
         $request->validate([
             'name' => "required|string|unique:products",
             'description' => "required|string",
@@ -76,10 +69,6 @@ class ProductsController extends Controller
             'image' => "string"
         ]);
 
-        $product = Products::where(['id' => $id])->first();
-        if($product === null){
-            die('Ovaj proizvod ne postoji');
-        }
 
         $product->name = $request->get('name');
         $product->description = $request->get('description');

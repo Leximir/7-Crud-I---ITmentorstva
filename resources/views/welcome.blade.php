@@ -9,7 +9,7 @@
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center">
-                <h2 class="mb-4">Welcome to the Home page!</h2>
+                <h2 class="mb-4">Welcome to the Dashboard page!</h2>
 
                 @if($currentHour >= 0 && $currentHour < 12)
                     <p class="lead">Good Morning</p>
