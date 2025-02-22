@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveProductRequest;
 use App\Models\Products;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
+    private $productRepo;
+    public function __construct()
+    {
+        $this->productRepo = new ProductRepository();
+    }
+
     public function index() {
         return view('admin-products' , [
             'pageTitle' => 'All Products' ,
@@ -26,7 +34,8 @@ class ProductsController extends Controller
         ]);
     }
     public function delete($product){
-        $singleProduct = Products::where(['id' => $product])->first(); // SELECT * FROM products WHERE id = $product LIMIT 1
+
+        $singleProduct = $this->productRepo->getProductById($product);
 
         if($singleProduct === null){
             die('Ovaj proizvod ne postoji');
@@ -41,23 +50,8 @@ class ProductsController extends Controller
             'pageTitle' => 'New Product'
         ]);
     }
-    public function addProduct(Request $request){
-        $request->validate([
-            'name' => "required|string|unique:products",
-            'description' => "required|string",
-            'amount' => "required|int|min:0",
-            'price' => "required|numeric",
-            'image' => "string"
-        ]);
-
-        Products::create([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'amount' => $request->get('amount'),
-            'price' => $request->get('price'),
-            'image' => $request->get('image'),
-        ]);
-
+    public function addProduct(SaveProductRequest $request){
+        $this->productRepo->createNew($request);
         return redirect()->route('SviProizvodi');
     }
     public function editProduct(Request $request , Products $product){
@@ -69,13 +63,7 @@ class ProductsController extends Controller
             'image' => "string"
         ]);
 
-
-        $product->name = $request->get('name');
-        $product->description = $request->get('description');
-        $product->amount = $request->get('amount');
-        $product->price = $request->get('price');
-        $product->image = $request->get('image');
-        $product->save();
+        $this->productRepo->editProduct($product, $request);
 
         return redirect()->route('SviProizvodi');
     }
