@@ -51,21 +51,15 @@ class ProductsController extends Controller
         ]);
     }
     public function addProduct(SaveProductRequest $request){
+
         $this->productRepo->createNew($request);
-        return redirect()->route('SviProizvodi');
-    }
-    public function editProduct(Request $request , Products $product){
-        $request->validate([
-            'name' => "required|string|unique:products",
-            'description' => "required|string",
-            'amount' => "required|int|min:0",
-            'price' => "required|numeric",
-            'image' => "string"
-        ]);
-
-        $this->productRepo->editProduct($product, $request);
 
         return redirect()->route('SviProizvodi');
     }
+    public function editProduct(SaveProductRequest $request , Products $product){
 
+        $this->productRepo->editProductById($product, $request);
+
+        return redirect()->route('SviProizvodi');
+    }
 }

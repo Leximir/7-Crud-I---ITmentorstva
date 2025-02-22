@@ -33,9 +33,9 @@ use Illuminate\Support\Facades\Route;
         Route::get('admin/product/edit/{product}' , [\App\Http\Controllers\ProductsController::class , 'indexEdit'])
             ->name('EditovanjeProizvoda');
 
-        Route::post('admin/product/edit/save/{id}' , [\App\Http\Controllers\ProductsController::class , 'editProduct'])
+        Route::post('admin/product/edit/save/{product}' , [\App\Http\Controllers\ProductsController::class , 'editProduct'])
             ->name('SnimanjeEditovanogProizvoda');
-        
+
 
 
 
