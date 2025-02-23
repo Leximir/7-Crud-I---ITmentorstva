@@ -17,20 +17,21 @@ use Illuminate\Support\Facades\Route;
         Route::get('/contact', 'index');
         Route::post('/send', 'sendContact')->name('SendContact');
         Route::get('/admin/all', 'getAllContacts')->name('SviKontakti');
-        Route::get('/admin/delete/{contact}', 'delete')->name('BrisanjeKontakta');
+        Route::get('/admin/delete/{contact}', 'delete')->name('contact.delete');
     });
 
-    Route::controller(ProductsController::class)->group(function() {
-        Route::get('/admin/all-products','index')
+    Route::controller(ProductsController::class)->prefix('/products')->group(function() {
+        Route::get('/all','index')
             ->name('SviProizvodi');
-        Route::get('/admin/delete-product/{product}','delete')
+        Route::get('/delete/{product}','delete')
             ->name('BrisanjeProizvoda');
-        Route::get('/admin/add-product','newProduct');
-        Route::post('/admin/product/save','addProduct')
+        Route::get('/add','newProduct')
+            ->name('AddProduct');
+        Route::post('/save','addProduct')
             ->name('SnimanjeProizvoda');
-        Route::get('admin/product/edit/{product}','indexEdit')
+        Route::get('/edit/{product}','indexEdit')
             ->name('EditovanjeProizvoda');
-        Route::get('admin/product/edit/save/{product}','editProduct')
+        Route::post('/edit/save/{product}','editProduct')
             ->name('SnimanjeEditovanogProizvoda');
     });
 
