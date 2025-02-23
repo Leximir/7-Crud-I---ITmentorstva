@@ -15,7 +15,7 @@
                 @foreach($allProducts as $product)
 
                     <li>
-                        <a href="">{{ $product->name }}</a>
+                        <a href="{{ route('products.permalink' , ['product' => $product->id]) }}">{{ $product->name }}</a>
                     </li>
 
 

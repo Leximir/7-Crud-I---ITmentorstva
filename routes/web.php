@@ -12,6 +12,7 @@ Route::get("/", [HomepageController::class , 'index']);
 Route::get("about" , [AboutController::class , 'index']);
 
 Route::get("/shop" , [ProductsController::class , 'indexClient']);
+Route::get("/products/{product}" , [ProductsController::class , 'permalink'])->name('products.permalink');
 
 Route::controller(ContactController::class)
     ->name('contact.')

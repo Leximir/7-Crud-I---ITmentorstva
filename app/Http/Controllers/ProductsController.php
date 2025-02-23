@@ -21,6 +21,12 @@ class ProductsController extends Controller
             'allProducts' => Products::all()
         ]);
     }
+    public function permalink(Products $product){
+        return view('permalink',[
+            'product' => $product,
+            'pageTitle' => $product->name
+        ]);
+    }
     public function indexClient() {
         return view('shop' , [
             'pageTitle' => 'Shop' ,
