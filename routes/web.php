@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::controller(ContactController::class)->group(function(){
         Route::get('/contact', 'index');
-        Route::post('/send', 'sendContact')->name('SendContact');
+        Route::post('/send', 'sendContact')->name('contact.send');
         Route::get('/admin/all', 'getAllContacts')->name('SviKontakti');
         Route::get('/admin/delete/{contact}', 'delete')->name('contact.delete');
     });

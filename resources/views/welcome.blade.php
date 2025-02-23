@@ -25,7 +25,7 @@
                     <p>{{ $product->name }}</p>
                 @endforeach
 
-                <form action="{{ route('SendContact') }}" method="POST">
+                <form action="{{ route('contact.send') }}" method="POST">
 
                     @if($errors->any())
                         <p>Greska: {{ $errors->first() }}</p>
