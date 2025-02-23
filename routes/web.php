@@ -13,26 +13,26 @@ use Illuminate\Support\Facades\Route;
 
     Route::get("/shop" , [ProductsController::class , 'indexClient']);
 
-    Route::controller(ContactController::class)->group(function(){
-        Route::get('/contact', 'index');
-        Route::post('/send', 'sendContact')->name('contact.send');
-        Route::get('/admin/all', 'getAllContacts')->name('SviKontakti');
-        Route::get('/admin/delete/{contact}', 'delete')->name('contact.delete');
+    Route::controller(ContactController::class)->name('contact')->group(function(){
+        Route::get('/contact', 'index')->name('index');
+        Route::post('/send', 'sendContact')->name('send');
+        Route::get('/admin/all', 'getAllContacts')->name('all');
+        Route::get('/admin/delete/{contact}', 'delete')->name('delete');
     });
 
-    Route::controller(ProductsController::class)->prefix('/products')->group(function() {
+    Route::controller(ProductsController::class)->prefix('/products')->name('products')->group(function() {
         Route::get('/all','index')
-            ->name('SviProizvodi');
+            ->name('all');
         Route::get('/delete/{product}','delete')
-            ->name('BrisanjeProizvoda');
+            ->name('delete');
         Route::get('/add','newProduct')
-            ->name('AddProduct');
+            ->name('add');
         Route::post('/save','addProduct')
-            ->name('SnimanjeProizvoda');
+            ->name('save');
         Route::get('/edit/{product}','indexEdit')
-            ->name('EditovanjeProizvoda');
+            ->name('edit');
         Route::post('/edit/save/{product}','editProduct')
-            ->name('SnimanjeEditovanogProizvoda');
+            ->name('edit.save');
     });
 
 require __DIR__.'/auth.php';

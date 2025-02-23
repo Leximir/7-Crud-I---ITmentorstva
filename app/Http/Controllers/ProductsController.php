@@ -54,12 +54,12 @@ class ProductsController extends Controller
 
         $this->productRepo->createNew($request);
 
-        return redirect()->route('SviProizvodi');
+        return redirect()->route('products.all');
     }
     public function editProduct(SaveProductRequest $request , Products $product){
 
         $this->productRepo->editProductById($product, $request);
 
-        return redirect()->route('SviProizvodi');
+        return redirect()->route('products.all');
     }
 }

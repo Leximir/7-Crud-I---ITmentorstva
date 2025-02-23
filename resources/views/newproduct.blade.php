@@ -6,7 +6,7 @@
 
 @section("pageContent")
 
-    <form action="{{ route('SnimanjeProizvoda') }}" method="POST" class="container">
+    <form action="{{ route('products.save') }}" method="POST" class="container">
 
         @if($errors->any())
             @foreach($errors->all() as $error)
