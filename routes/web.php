@@ -1,43 +1,37 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-// First Page
-    Route::get("/", [\App\Http\Controllers\HomepageController::class , 'index']);
 
-    Route::get("about" , [\App\Http\Controllers\AboutController::class , 'index']);
+    Route::get("/", [HomepageController::class , 'index']);
 
-    Route::get("/contact" , [\App\Http\Controllers\ContactController::class , 'index']);
+    Route::get("about" , [AboutController::class , 'index']);
 
-    Route::post("/send-contact" , [\App\Http\Controllers\ContactController::class , 'sendContact']);
+    Route::get("/shop" , [ProductsController::class , 'indexClient']);
 
-    Route::get("/shop" , [\App\Http\Controllers\ProductsController::class , 'indexClient']);
-// Admin
-    // Contacts
-        Route::get("/admin/all-contacts" , [\App\Http\Controllers\ContactController::class , 'getAllContacts'])
-            ->name('SviKontakti');
+    Route::controller(ContactController::class)->group(function(){
+        Route::get('/contact', 'index');
+        Route::post('/send', 'sendContact')->name('SendContact');
+        Route::get('/admin/all', 'getAllContacts')->name('SviKontakti');
+        Route::get('/admin/delete/{contact}', 'delete')->name('BrisanjeKontakta');
+    });
 
-        Route::get("/admin/delete-contact/{contact}" , [\App\Http\Controllers\ContactController::class , 'delete'])
-            ->name('BrisanjeKontakta');
-    // Products
-        Route::get('/admin/all-products' , [\App\Http\Controllers\ProductsController::class , 'index'] )
+    Route::controller(ProductsController::class)->group(function() {
+        Route::get('/admin/all-products','index')
             ->name('SviProizvodi');
-
-        Route::get('/admin/delete-product/{product}' , [\App\Http\Controllers\ProductsController::class , 'delete'])
+        Route::get('/admin/delete-product/{product}','delete')
             ->name('BrisanjeProizvoda');
-
-        Route::get("/admin/add-product" , [\App\Http\Controllers\ProductsController::class , 'newProduct']);
-        Route::post("/admin/product/save" , [\App\Http\Controllers\ProductsController::class , 'addProduct'])
+        Route::get('/admin/add-product','newProduct');
+        Route::post('/admin/product/save','addProduct')
             ->name('SnimanjeProizvoda');
-
-        Route::get('admin/product/edit/{product}' , [\App\Http\Controllers\ProductsController::class , 'indexEdit'])
+        Route::get('admin/product/edit/{product}','indexEdit')
             ->name('EditovanjeProizvoda');
-
-        Route::post('admin/product/edit/save/{product}' , [\App\Http\Controllers\ProductsController::class , 'editProduct'])
+        Route::get('admin/product/edit/save/{product}','editProduct')
             ->name('SnimanjeEditovanogProizvoda');
-
-
-
-
+    });
 
 require __DIR__.'/auth.php';

@@ -25,7 +25,7 @@
                     <p>{{ $product->name }}</p>
                 @endforeach
 
-                <form action="/send-contact" method="POST">
+                <form action="{{ route('SendContact') }}" method="POST">
 
                     @if($errors->any())
                         <p>Greska: {{ $errors->first() }}</p>
@@ -34,7 +34,7 @@
                     {{ csrf_field() }}
                     <input name="email" type="email" placeholder="Enter your email address">
                     <input name="subject" type="text" placeholder="Enter your subject">
-                    <textarea name="description" id="" cols="30" rows="10"></textarea>
+                    <textarea name="message" id="" cols="30" rows="10"></textarea>
                     <button type="submit">Contact Us</button>
                 </form>
             </div>
