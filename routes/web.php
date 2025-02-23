@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomepageController::class , 'index']);
@@ -13,6 +14,9 @@ Route::get("about" , [AboutController::class , 'index']);
 
 Route::get("/shop" , [ProductsController::class , 'indexClient']);
 Route::get("/products/{product}" , [ProductsController::class , 'permalink'])->name('products.permalink');
+
+Route::post('/cart/add' , [ShoppingCartController::class, 'addToCart'])->name('cart.add');
+Route::get('cart', [ShoppingCartController::class, 'index'])->name('cart.index');
 
 Route::controller(ContactController::class)
     ->name('contact.')
